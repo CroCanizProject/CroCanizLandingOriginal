@@ -1,0 +1,51 @@
+<body>
+ 
+<app-header-main></app-header-main>
+
+
+<section id="hero">
+    <h1>Si a tu perro quieres feliz<br>dale una lombriz</h1>
+    <button >¡Contáctanos!</button>
+</section>
+
+
+<section id="somos-proya">
+    <div class="container">
+        <div class="img-container"></div>
+        <div class="texto">
+            <h2>Somos <span class="color-acento">Cro Caniz</span></h2>
+            <p>Somos una empresa comprometida con la alimentación para tus mejores amigos</p>
+        </div>
+    </div>
+</section>
+
+<section id="nuestros-programas" *ngIf="data">
+    <div class="container">
+        <h2>¡Conocenos!</h2>
+        <div class="programas">
+            <div class="carta">
+                <h3>NUESTRA MISIÓN</h3>
+                <p  *ngFor="let itemMision of (data | keyvalue | slice:3:4)">{{itemMision.value}}</p>
+                <!-- <button>+ Info</button> -->
+            </div>
+            <div class="carta">
+                <h3>NUESTRA VISIÓN</h3>
+                <p *ngFor="let itemVision of (data | keyvalue | slice:4:5)">{{itemVision.value}}</p>
+                <!-- <button>+ Info</button> -->
+            </div>  
+        </div>
+    </div>
+</section>
+
+<div class="redes-sociales">
+    <a href="#" class="facebook"><img src="../../assets/img/facebook.png" alt="Facebook"></a>
+    <a href="#" class="instagram"><img src="../../assets/img/instagram.png" alt="Instagram"></a>
+    <a href="#" class="linkedin"><img src="../../assets/img/toutube.png" alt="LinkedIn"></a>
+</div>
+
+
+<app-footer-main></app-footer-main>
+
+
+
+</body>

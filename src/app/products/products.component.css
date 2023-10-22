@@ -1,0 +1,10 @@
+.xd{
+    max-width: 1250px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}

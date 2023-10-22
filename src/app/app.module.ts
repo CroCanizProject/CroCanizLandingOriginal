@@ -7,12 +7,18 @@ import { ProductsComponent } from './products/products.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingCarComponent } from './shopping-car/shopping-car.component';
+import { IndexComponent } from './index/index.component';
+import { HeaderMainComponent } from './header-main/header-main.component';
+import { FooterMainComponent } from './footer-main/footer-main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
-    ShoppingCarComponent
+    ShoppingCarComponent,
+    IndexComponent,
+    HeaderMainComponent,
+    FooterMainComponent
   ],
   imports: [
     BrowserModule,

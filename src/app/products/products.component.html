@@ -1,12 +1,32 @@
-<h2>Productos</h2>
-<button [routerLink]="['/carrito']">IrCarrito</button>
-<div class="card" style="width: 18rem;" *ngFor="let item of product">
-    <img src="{{item.image.url}}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{item.name}}</h5>
-      <p class="card-text">{{item.description}}</p>
-      <p class="card-text">{{item.price}}</p>
-      
-      <button type="button" class="btn btn-secondary" (click)="addShoppingCar(item)">Agregar carrito</button>
+<app-header-main></app-header-main>
+<!-- app.component.html -->
+
+<div>
+
+  <div
+    style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 2rem;">
+    <!-- <h2>Productos</h2>
+    <button style="width: 20%;" [routerLink]="['/carrito']">Carrito</button> -->
+  </div>
+
+  
+  <!-- <div style="display: flex; justify-content: center; column-gap: 3rem;"> -->
+    <div class="xd">
+    <div class="card" style="width: 18rem; margin-top: 100px;" *ngFor="let item of product">
+      <img src="{{item.image.url}}" style="height: 100%; object-fit: cover; align-items: center;" class="card-img-top"
+        alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{item.name}}</h5>
+        <p class="card-text">{{item.description}}</p>
+        <p class="card-text">$ {{item.price}} MNX</p>
+        <button type="button" class="btn btn-secondary" (click)="addShoppingCar(item)">Agregar carrito</button>
+      </div>
     </div>
   </div>
+
+</div>
+
+
+
+
+<!-- <app-footer-main></app-footer-main> -->
