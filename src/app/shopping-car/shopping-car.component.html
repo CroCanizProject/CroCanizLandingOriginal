@@ -1,0 +1,66 @@
+<h2>Carrito</h2>
+
+<p>Total de prod: {{ getTotalCantidadProductos() }}</p>
+<p>Total a pagar: {{ getTotalSubtotales() }}</p>
+
+
+
+<div class="form" [formGroup]="salesForm">
+  <div class="form-group">
+    <label for="calle">Calle</label>
+    <input type="text" id="street" formControlName="street" class="form-control">
+  </div>
+
+
+  <div class="form-group">
+    <label for="calle">Número</label>
+    <input type="number" id="number" formControlName="number" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="calle">Colonia</label>
+    <input type="text" id="colony" formControlName="colony" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="calle">Código Postal</label>
+    <input type="text" id="zip_code" formControlName="zip_code" class="form-control">
+  </div>
+
+
+  <div class="form-group">
+    <label for="calle">Municipio</label>
+    <input type="text" id="municipality" formControlName="municipality" class="form-control">
+  </div>
+
+
+  <div class="form-group">
+    <label for="calle">Estado</label>
+    <input type="text" id="state" formControlName="state" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="calle">paymentIntent</label>
+    <input type="text" id="paymentIntent" formControlName="paymentIntent" class="form-control">
+  </div>
+
+</div>
+
+<div class="card" style="width: 18rem;" *ngFor="let item of listShoppingCar ">
+  <form class="form" [formGroup]="salesForm">
+    <div class="card-body">
+      <img src="{{item.item.image.url}}" class="card-img-top" alt="...">
+      <h5 for="identificador" class="card-title">{{item.item.id}}</h5>
+      <h5 class="card-title">{{item.item.name}}</h5>
+      <p class="card-text">{{item.item.description}}</p>
+      <p class="card-text">Precio por unidad: {{item.item.price}}</p>
+      <p for="cantidad" class="card-text">Cantidad: {{ item.cantidad }}</p>
+      <p class="card-text">Subtotal: {{subtotal( item.item.price , item.cantidad )}}</p>
+    </div>
+  </form>
+</div>
+
+
+
+<button (click)="generateSale()" type="submit" class="input">Generar Venta</button>
+<button type="button" class="btn btn-secondary" (click)="emptyShoppingCar()">Vaciar carrito</button>

@@ -1,0 +1,12 @@
+<h2>Productos</h2>
+<button [routerLink]="['/carrito']">IrCarrito</button>
+<div class="card" style="width: 18rem;" *ngFor="let item of product">
+    <img src="{{item.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{item.name}}</h5>
+      <p class="card-text">{{item.description}}</p>
+      <p class="card-text">{{item.price}}</p>
+      
+      <button type="button" class="btn btn-secondary" (click)="addShoppingCar(item)">Agregar carrito</button>
+    </div>
+  </div>
