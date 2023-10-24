@@ -1,7 +1,17 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SalesService } from '../services/sales.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+import { OrdersService } from '../services/orders.service';
+import Stripe from 'stripe';
+
+
+declare global {
+  interface Window {
+    example: any; // 👈️ turn off type checking
+  }
+}
 
 @Component({
   selector: 'app-shopping-car',
@@ -10,23 +20,58 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class ShoppingCarComponent {
 
-  constructor(private fb: FormBuilder, private router: Router, private sale: SalesService) {
+  constructor(private order: OrdersService, private fb: FormBuilder, private router: Router, private sale: SalesService) {
+
     this.salesForm = this.fb.group({
-      street:['', Validators.required],
-      number:['', Validators.required],
-      colony:['', Validators.required],
-      zip_code:['', Validators.required],
-      municipality:['', Validators.required],
-      state:['', Validators.required],
-      paymentIntent:['', Validators.required],
+      street: ['', Validators.required],
+      number: ['', Validators.required],
+      colony: ['', Validators.required],
+      zip_code: ['', Validators.required],
+      municipality: ['', Validators.required],
+      state: ['', Validators.required],
+      paymentIntent: ['', Validators.required],
       items: [],
       // totalCantidadProductos: 0, 
       // totalAPagar: 0,
-      
+
+    });
+
+
+
+  }
+
+  makePayment(amount:any){
+    const paymentHandler = (<any>window).StripeCheckout.configure({
+      key:
+      'pk_test_51KdHpCLv3DAilF3a717lsqDl8jHrEuT5qataPcumOy9vhbfCn42b5Pdt1BO50GyOnDoqN9gGJ8UPYroPSg8hUuE600ED56fcdO',
+      locale:'auto',
+      token:function(stripeToken:any){
+        console.log(stripeToken.card);
+        alert('Stripe token generated! ');
+      },
+    });
+    paymentHandler.open({
+      name: 'Cro Caniz',
+      description: 'Productos a pagar ',
+      amount:amount*100,
     });
   }
 
 
+
+  invokeStripe(){
+    if(!window.document.getElementById('stripe-script')){
+      const script = window.document.createElement('script');
+      script.id = 'stripe-script';
+      script.type = 'text/javascript';
+      script.src = 'https://checkout.stripe.com/checkout.js';
+      window.document.body.appendChild(script);
+    }
+  }
+
+
+
+ 
 
   listShoppingCar: any[] = [];
   carrito: any[] = [];
@@ -37,14 +82,12 @@ export class ShoppingCarComponent {
     let carStorage = localStorage.getItem("carrito") as string;
     let carrito = JSON.parse(carStorage);
     this.listShoppingCar = carrito
-
-
+    this.invokeStripe();
   }
 
 
+  
 
-
-  // Función para obtener el total de artículos por producto.
   getTotalPorProducto(item: any) {
     const cartItem = this.carrito.find((cartItem) => cartItem.item.id === item.id);
 
@@ -118,18 +161,18 @@ export class ShoppingCarComponent {
     };
 
 
-    if(this.salesForm.valid){
-        this.sale.addSale(this.salesForm.value).subscribe({
-          next:(res=>{
-            console.log("DONE!")
-          }),
-          error:(err)=>{
-            alert(err.error.message)
-            console.log("ERROR")
-          }
-        })
+    if (this.salesForm.valid) {
+      this.sale.addSale(this.salesForm.value).subscribe({
+        next: (res => {
+          console.log("DONE!")
+        }),
+        error: (err) => {
+          alert(err.error.message)
+          console.log("ERROR")
+        }
+      })
     }
-    else{
+    else {
       this.validateAll(this.salesForm);
       console.log("Error de formulario");
     }

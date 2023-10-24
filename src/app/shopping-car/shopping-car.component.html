@@ -1,6 +1,90 @@
-<h2>Carrito</h2>
+<app-general-content>
 
-<p>Total de prod: {{ getTotalCantidadProductos() }}</p>
+  <div style="background-color: aqua;">
+
+    <p>Total de prod: {{ getTotalCantidadProductos() }}</p>
+    <p>Total a pagar: {{ getTotalSubtotales() }}</p>
+    
+      <div
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 2rem;">
+        <h2>Carrito</h2>
+        <!-- <h2>Productos</h2>
+        <button style="width: 20%;" [routerLink]="['/carrito']">Carrito</button> -->
+      </div>
+    
+    
+      <!-- <div style="display: flex; justify-content: center; column-gap: 3rem;"> -->
+      <div class="xd">
+        <form class="form" [formGroup]="salesForm">
+          <div class="card" style="width: 18rem; margin-top: 100px;" *ngFor="let item of listShoppingCar">
+            <img src="{{item.item.image.url}}" style="height: 100%; object-fit: cover; align-items: center;" class="card-img-top"
+              alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.item.name}}</h5>
+              <p class="card-text">{{item.item.description}}</p>
+              <p class="card-text">Precio por unidad: $ {{item.item.price}} MNX</p>
+              <p for="cantidad" class="card-text">Cantidad: {{ item.cantidad }}</p>
+              <p class="card-text">Subtotal: {{subtotal( item.item.price , item.cantidad )}}</p>
+            </div>
+          </div>
+          <!-- <div class="card" style="width: 18rem; margin-top: 100px;" *ngFor="let item of listShoppingCar">
+
+            <img src="{{item.item.image.url}}" style="height: 100%; object-fit: cover; align-items: center;"
+              class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.item.name}}</h5>
+              <p class="card-text">{{item.item.description}}</p>
+              <p class="card-text">Precio por unidad: $ {{item.item.price}} MNX</p>
+              <p for="cantidad" class="card-text">Cantidad: {{ item.cantidad }}</p>
+              <p class="card-text">Subtotal: {{subtotal( item.item.price , item.cantidad )}}</p>
+            </div>
+          </div> -->
+        </form>
+      </div>
+    
+    </div>
+
+</app-general-content>
+
+
+<!-- <div class="xd">
+  <div class="card" style="width: 18rem; margin-top: 100px;" *ngFor="let item of product">
+    <img src="{{item.image.url}}" style="height: 100%; object-fit: cover; align-items: center;" class="card-img-top"
+      alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{item.name}}</h5>
+      <p class="card-text">{{item.description}}</p>
+      <p class="card-text">$ {{item.price}} MNX</p>
+      <button type="button" class="btn btn-secondary" (click)="addShoppingCar(item)">Agregar carrito</button>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div>
+  <h1>PAGO</h1>
+  <button (click)="makePayment(10)">Pay 10</button>
+</div> -->
+
+
+
+
+<!-- <div class="form-group">
+    <label for="calle">Número de tarjeta</label>
+    <input type="text" id="card" formControlName="card" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="calle">CVV</label>
+    <input type="text" id="cvv" formControlName="cvv" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="calle">Fecha de Vencimiento</label>
+    <input type="text" id="exp" formControlName="exp" class="form-control">
+  </div> -->
+<!-- </form> -->
+
+
+
+<!-- <p>Total de prod: {{ getTotalCantidadProductos() }}</p>
 <p>Total a pagar: {{ getTotalSubtotales() }}</p>
 
 
@@ -63,4 +147,4 @@
 
 
 <button (click)="generateSale()" type="submit" class="input">Generar Venta</button>
-<button type="button" class="btn btn-secondary" (click)="emptyShoppingCar()">Vaciar carrito</button>
+<button type="button" class="btn btn-secondary" (click)="emptyShoppingCar()">Vaciar carrito</button> -->

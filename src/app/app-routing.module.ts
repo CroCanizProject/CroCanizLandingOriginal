@@ -10,7 +10,8 @@ import { IndexComponent } from './index/index.component';
 const ROUTES:Routes = [
   {path: '', component:  IndexComponent },
   {path: 'productos', component: ProductsComponent},
-  {path: 'carrito', component: ShoppingCarComponent}
+  {path: 'carrito', component: ShoppingCarComponent},
+  // {path: 'checkout/:id', ShoppingCarComponent}
 ]
 
 

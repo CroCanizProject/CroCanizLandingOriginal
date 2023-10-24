@@ -17,7 +17,10 @@ export class ProductsComponent {
   carrito: any[] = [];
 
 
-  ngOnInit() {
+  ngOnInit():void {
+  
+
+
     this.producto.getProductos().subscribe((response) => {
       this.product = response.data;
       // console.log(this.product = response.data);

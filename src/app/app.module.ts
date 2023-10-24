@@ -10,6 +10,8 @@ import { ShoppingCarComponent } from './shopping-car/shopping-car.component';
 import { IndexComponent } from './index/index.component';
 import { HeaderMainComponent } from './header-main/header-main.component';
 import { FooterMainComponent } from './footer-main/footer-main.component';
+import { GeneralContentComponent } from './general-content/general-content.component';
+
 
 @NgModule({
   declarations: [
@@ -18,15 +20,15 @@ import { FooterMainComponent } from './footer-main/footer-main.component';
     ShoppingCarComponent,
     IndexComponent,
     HeaderMainComponent,
-    FooterMainComponent
+    FooterMainComponent,
+    GeneralContentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
