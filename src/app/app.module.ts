@@ -21,7 +21,7 @@ import { GeneralContentComponent } from './general-content/general-content.compo
     IndexComponent,
     HeaderMainComponent,
     FooterMainComponent,
-    GeneralContentComponent
+    GeneralContentComponent,
   ],
   imports: [
     BrowserModule,

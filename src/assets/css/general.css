@@ -11,9 +11,13 @@ body{
     margin: 0;
 }
 
-h1{ font-size: 3.5em;}
-h2{ font-size: 2.7em;}
-h3{ font-size: 2em;}
+h1{ 
+    font-size: 3.5em; 
+    
+}
+h2{ font-size: 2.7em;
+    text-align: center;}
+h3{ font-size: 2em; text-align: center;}
 p{ font-size: 1.25em;}
 ul{ list-style: none;}
 li{ font-size: 1.25em;}
@@ -38,10 +42,24 @@ button:hover{
     margin: auto;
 }
 
+.xd{
+    margin-top: 100px; 
+    max-width: 1250px;
+    /* margin: 0 auto; */
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   
+}
+
 .color-acento{ color:#E20D77; }
 
 header{
     background-color: rgb(245,245,245);
+    z-index: 1000;
     
 }
 
@@ -103,7 +121,7 @@ header a:hover{
     font-size: 1.75em;
 }
 
-#somos-proya .container{
+#somos-cro .container{
     text-align: center;
     padding: 200px 12px;
 }
@@ -219,24 +237,26 @@ footer .container{
     header .container{
         flex-direction: row;
         justify-content: space-between;
+
     }
 
     header nav{
         flex-direction: row;
         padding-bottom: 0;
         padding-right: 20px;
+     
     }
 
     #hero h1{
         font-size: 5em;
     }
 
-    #somos-proya .container{
+    #somos-cro .container{
         display: flex;
         justify-content: space-evenly;
     }
 
-    #somos-proya .texto{
+    #somos-cro .texto{
         width: 50%;
         max-width: 600px;
         text-align: initial;
@@ -246,12 +266,12 @@ footer .container{
         justify-content: center;
     }
 
-    #somos-proya h2{
+    #somos-cro h2{
         margin-top: 0px;
     }
 
-    #somos-proya .img-container{
-        background-image: url("../../assets/img/aislado-feliz-sonriente-perro-fondo-blanco-retrato-4_1562-693-removebg-preview.png");
+    #somos-cro .img-container{
+        /* background-image: url("../../assets/img/aislado-feliz-sonriente-perro-fondo-blanco-retrato-4_1562-693-removebg-preview.png"); */
         background-size: cover;
         background-position: center center;
         height: 500px;

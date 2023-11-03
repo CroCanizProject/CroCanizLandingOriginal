@@ -14,7 +14,12 @@ export class SalesService {
 
 
   addSale(data:any){
-    return this.http.post(environment.url + "sales",data)
+    return this.http.post(environment.url+'sales',data)
+  }
+
+
+  validateCheck(client:any){
+    return this.http.post(environment.url+'checkout',client)
   }
 
 
