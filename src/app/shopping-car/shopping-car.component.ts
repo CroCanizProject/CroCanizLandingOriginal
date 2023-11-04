@@ -5,6 +5,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { environment } from 'src/environments/environment';
 import { OrdersService } from '../services/orders.service';
 import Stripe from 'stripe';
+import { HttpClient } from '@angular/common/http';
+// import { StripeElement } from '@stripe/stripe-js/types/stripe-js/elements-group';
+// import { StripeService, Elements, Element as StripeElement, ElementsOptions } from 'ngx-stripe';
 
 
 declare global {
@@ -26,40 +29,35 @@ export class ShoppingCarComponent implements OnInit{
   salesForm!: FormGroup;
 
 
-  constructor(private order: OrdersService, private fb: FormBuilder, private router: Router, private sale: SalesService) {
-
-    // this.salesForm = this.fb.group({
-    //   street: ['', Validators.required],
-    //   number: ['', Validators.required],
-    //   colony: ['', Validators.required],
-    //   zip_code: ['', Validators.required],
-    //   municipality: ['', Validators.required],
-    //   state: ['', Validators.required],
-    //   paymentIntent: ['', Validators.required],
-    //   items: [],
-      // totalCantidadProductos: 0, 
-      // totalAPagar: 0,
-
-    // });
 
 
 
+  
+
+  constructor(private order: OrdersService, private fb: FormBuilder, private router: Router, private sale: SalesService,
+    private http: HttpClient
+    ) {
   }
 
-//   getLocation() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition((position) => {
-//       const latitude = position.coords.latitude;
-//       const longitude = position.coords.longitude;
-//       console.log(`Latitud: ${latitude}, Longitud: ${longitude}`);
-//       // Haz algo con la ubicación, como mostrarla en un mapa o enviarla al servidor.
-//     }, (error) => {
-//       console.error(`Error obteniendo la ubicación: ${error.message}`);
-//     });
-//   } else {
-//     console.error('El navegador no soporta geolocalización.');
-//   }
-// }
+
+
+
+
+confirmarPago(clientSecret: string) {
+  this.http.post<any>('https://backend.crocainz.live/api/checkout', { client_secret: clientSecret })
+    .subscribe(
+      (data) => {
+        console.log('Respuesta del servidor:', data);
+        // Aquí puedes actualizar la interfaz de usuario según la respuesta del servidor
+      },
+      (error) => {
+        console.error('Error al confirmar el pago:', error);
+        // Maneja el error en caso de problemas con la confirmación del pago
+      }
+    );
+}
+
+
 
   makePayment(amount: any) {
     const items = this.listShoppingCar.map(item => {
@@ -72,6 +70,8 @@ export class ShoppingCarComponent implements OnInit{
     const requestData = {
       items: items,
     };
+
+    const stripe = require('stripe')('pk_test_51KdHpCLv3DAilF3a717lsqDl8jHrEuT5qataPcumOy9vhbfCn42b5Pdt1BO50GyOnDoqN9gGJ8UPYroPSg8hUuE600ED56fcdO');
   
     
     const paymentHandler = (<any>window).StripeCheckout.configure({
@@ -80,6 +80,8 @@ export class ShoppingCarComponent implements OnInit{
         
       locale: 'auto',
       token: (stripeToken: any) => {
+        
+        
         const saleData = {
           street: 'Miguel Hidalgo',
           number: '520',
@@ -89,21 +91,27 @@ export class ShoppingCarComponent implements OnInit{
           state: 'México',
           items: items,
           paymentIntent: stripeToken.id,
+          
         };
+
+        const clientSecret = stripeToken.client_secret;
+
+        this.confirmarPago(clientSecret);
+
 
         
 
-        this.sale.validateCheck(requestData).subscribe({
-          next: (res) => {
-            console.log("Venta completada:", res);
-            // Realiza acciones adicionales, como redirigir al usuario a una página de confirmación
-          },
-          error: (err) => {
-            alert("Error al procesar la venta: " + err.error.message);
-            console.error("Error:", err);
-            // Maneja errores y notifica al usuario si la venta falló
-          },
-        });
+        // this.sale.validateCheck(requestData).subscribe({
+        //   next: (res) => {
+        //     console.log("Venta completada:", res);
+        //     // Realiza acciones adicionales, como redirigir al usuario a una página de confirmación
+        //   },
+        //   error: (err) => {
+        //     alert("Error al procesar la venta: " + err.error.message);
+        //     console.error("Error:", err);
+        //     // Maneja errores y notifica al usuario si la venta falló
+        //   },
+        // });
       },
     });
     paymentHandler.open({
@@ -136,10 +144,6 @@ export class ShoppingCarComponent implements OnInit{
   ngOnInit(): void {
     this.invokeStripe();
     this.loadShoppingCart();
-    // let carStorage = localStorage.getItem("carrito") as string;
-    // let carrito = JSON.parse(carStorage);
-    // this.listShoppingCar = carrito
-    // this.invokeStripe();
   }
 
   loadShoppingCart() {
