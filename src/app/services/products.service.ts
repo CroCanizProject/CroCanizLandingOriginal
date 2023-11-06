@@ -20,6 +20,14 @@ export class ProductsService {
     return this.http.get(environment.url + "products" );
   }
 
+  
+  getThreeProducts(): Observable<any> {
+    return this.http.get(environment.url + "products?limit=2" );
+  }
+
+
+
+
   // getProductos():Observable<ProductInfo[]>{
   //   let direccion = this.url + "/products";
   //   return this.http.get<ProductInfo[]>(direccion);

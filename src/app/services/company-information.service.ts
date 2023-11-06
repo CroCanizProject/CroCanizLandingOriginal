@@ -17,5 +17,10 @@ export class CompanyInformationService {
   getGeneralInformation(): Observable<any> {
     return this.http.get(environment.url  + "companyinformation");
   }
+
+
+  sendContact(data:any): Observable<any> {
+    return this.http.post(environment.url  + "contact", data);
+  }
   
 }

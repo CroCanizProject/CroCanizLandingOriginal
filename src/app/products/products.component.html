@@ -1,29 +1,50 @@
 <app-general-content>
 
-  <div>
+<!-- Aqui debe ir un spinner -->
 
-    <div
-      style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 2rem; background-color: rgb(105, 105, 163);">
-      
-      <!-- <h2>Productos</h2>
-      <button style="width: 20%;" [routerLink]="['/carrito']">Carrito</button> -->
-    </div>
-  
-  
-    <!-- <div style="display: flex; justify-content: center; column-gap: 3rem;"> -->
-    <div class="xd">
-      <div class="card" style="width: 18rem; margin-top: 100px;" *ngFor="let item of product">
-        <img src="{{item.image.url}}" style="height: 100%; object-fit: cover; align-items: center;" class="card-img-top"
-          alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{item.name}}</h5>
-          <p class="card-text">{{item.description}}</p>
-          <p class="card-text">$ {{item.price}} MNX</p>
-          <button type="button" class="btn btn-secondary" (click)="addShoppingCar(item)">Agregar carrito</button>
-        </div>
+
+<!-- Start Product Section -->
+
+<div class="container">
+  <h2>Productos</h2>
+  <div class="xd">
+    <div class="card" style="width: 18rem; margin-top: 100px;" *ngFor="let item of product">
+      <img src="{{item.image.url}}" style="height: 100%; object-fit: cover; align-items: center;" class="card-img-top"
+        alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{item.name}}</h5>
+        <p class="card-text">{{item.description}}</p>
+        <p class="card-text">$ {{item.price}} MNX</p>
+        <button type="button" class="btn btn-secondary" (click)="addShoppingCar(item)">Agregar carrito</button>
       </div>
     </div>
-  
   </div>
+  
+</div>
+
+<!-- <div class="product-section" *ngFor="let data of product">
+  <div class="container">
+      <div class="row">
+          <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+              <a class="product-item" href="cart.html">
+                  <img src="{{data.image.url}}" class="img-fluid product-thumbnail">
+                  <h2 class="product-title">{{data.name}}</h2>
+                  <h3 class="product-title">{{data.description}}</h3>
+                  <strong class="product-price">$ {{data.price}} MXN</strong>
+
+                  <span class="icon-cross" (click)="addShoppingCar(data)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="white"
+                          class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                          <path
+                              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>
+                  </span>
+              </a>
+          </div>
+      </div>
+  </div>
+</div> -->
+
+
 
 </app-general-content>

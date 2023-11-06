@@ -18,8 +18,12 @@ export class SalesService {
   }
 
 
-  validateCheck(client:any){
-    return this.http.post(environment.url+'checkout',client)
+  validateCheck(data:any){
+    return this.http.post(environment.url+'checkout',data)
+  }
+
+  second(data:any){
+    return this.http.post(environment.url+'checkout/confirm',data)
   }
 
 
