@@ -1,173 +1,79 @@
-<!-- <button type="button" class="btn btn-secondary" (click)="emptyShoppingCar()">Vaciar carrito</button> -->
+<app-header-main></app-header-main>
 
+<div class="card">
+  <h3>  <strong class="text-black">Cantidad de productos: {{getTotalCantidadProductos()}}</strong></h3>
+  <h3>  <strong class="text-black"> Total a pagar: $ {{getTotalSubtotales()}} MXN </strong></h3>
 
-
-
-
-
-
-
-
-
-
-<app-general-content>
-
-
-  <!-- <div class="hero">
-    <div class="container">
-      <div class="row justify-content-between">
-        <div class="col-lg-5">
-          <div class="intro-excerpt">
-            <h1>Carrito de compras</h1>
-          </div>
-        </div>
-        <div class="col-lg-7">
-          
-        </div>
+  <h4>Por favor, llena los campos para completar tu compra</h4>
+  <div class="credit-card">
+    <div>
+      <div #cardInfo></div>
+      <div class="error" *ngIf="cardError">
+        {{cardError}}
       </div>
     </div>
-  </div> -->
+    <button (click)="onClick()" type="button" class="btn btn-warning">Pagar</button>
+  </div>
+
+</div>
 
 
-  <div class="untree_co-section before-footer-section">
-    <div class="container">
-      <div class="row mb-5">
-        <form class="col-md-12" method="post">
-          <div class="site-blocks-table">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class="product-thumbnail">Imagen</th>
-                  <th class="product-name">Producto</th>
-                  <th class="product-name">Descripción</th>
-                  <th class="product-price">Precio</th>
-                  <th class="product-quantity">Cantidad</th>
-                  <th class="product-total">Total</th>
-                  <!-- <th class="product-remove">Remove</th> -->
-                </tr>
-              </thead>
-              <tbody >
-                <tr *ngFor="let item of listShoppingCar">
-                  <td class="product-thumbnail">
-                    <img src="{{item.item.name}}" alt="Image" class="img-fluid">
-                  </td>
-                  <td class="product-name">
-                    <h2 class="h5 text-black">{{item.item.name}}</h2>
-                  </td>
-                  <td class="product-name">
-                    <h2 class="h5 text-black">{{item.item.description}}</h2>
-                  </td>
 
-                  <td>$ {{item.item.price}} MXN</td>
-                  <td>
-                    
-                    <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
-                      <div class="input-group-prepend">
-                        <button class="btn btn-outline-black decrease" type="button">&minus;</button>
-                      </div>
-                      <input type="text" class="form-control text-center quantity-amount" value="{{getTotalCantidadProductos()}}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-black increase" type="button">&plus;</button>
-                      </div>
-                    </div>
+<section class="food_section layout_padding-bottom">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Carrito de compras
+      </h2>
+    </div>
+    <div class="filters-content">
+      <div class="row grid">
+        <div class="col-sm-6 col-lg-4" *ngFor="let item  of listShoppingCar; let i = index" >
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <img src="{{item.item.image.url}}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  {{item.item.name}}
+                </h5>
 
-                  </td>
-                  <td>{{  calculateSubtotal(item)}}</td>
+                <p>
+                  {{item.item.description}}
+                </p>
 
-                  <!-- <td><a href="#" class="btn btn-black btn-sm">X</a></td> -->
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </form>
-      </div>
+                <p>
+                  {{getTotalCantidadProductos()}}
+                </p>
 
-      <div class="row">
+                <h6>
+                  $ {{item.item.price}} MXN por pieza
+                </h6>
 
 
-        <!-- <div class="col-md-6">
-          <div class="row mb-5">
-            <div class="col-md-6 mb-3 mb-md-0">
-              <button class="btn btn-black btn-sm btn-block">Update Cart</button>
-            </div>
-            <div class="col-md-6">
-              <button class="btn btn-outline-black btn-sm btn-block">Continue Shopping</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <label class="text-black h4" for="coupon">Coupon</label>
-              <p>Enter your coupon code if you have one.</p>
-            </div>
-            <div class="col-md-8 mb-3 mb-md-0">
-              <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-            </div>
-            <div class="col-md-4">
-              <button class="btn btn-black">Apply Coupon</button>
-            </div>
-          </div>
-        </div> -->
-        <div class="col-md-6 pl-5" *ngFor="let item of listShoppingCar">
-          <div class="row justify-content-end">
-            <div class="col-md-7">
-              <div class="row">
-                <div class="col-md-12 text-right border-bottom mb-5">
-                  <h3 class="text-black h4 text-uppercase">Total de carrito</h3>
+                <div class="options">
+
+                  <p>
+                    Subtotal: $ {{ calculateSubtotal(item)}} MXN
+                  </p>
+
+                  <a  (click)="removeProduct(i)" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                    </svg>
+                  </a>
                 </div>
               </div>
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <span class="text-black">Subtotal</span>
-                </div>
-                <div class="col-md-6 text-right">
-                  <strong class="text-black">{{  calculateSubtotal(item)}}</strong>
-                </div>
-              </div>
-              <div class="row mb-5">
-                <div class="col-md-6">
-                  <span class="text-black">Total</span>
-                </div>
-                <div class="col-md-6 text-right">
-                  <strong class="text-black">{{getTotalSubtotales()}}</strong>
-                </div>
-              </div>
-
-              <!-- <div class="row">
-                <div class="col-md-12">
-                  <button class="btn btn-black btn-lg py-3 btn-block" onclick="onclick()" >Pagar</button>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
-        
-        <div class="credit-card">
-          <div>
-            <div #cardInfo></div>
-            <div class="error" *ngIf="cardError">
-              {{cardError}}
-            </div>
-          </div>
-          <button (click)="onClick()" type="button" class="btn btn-warning">Pagar</button>
-        </div>
-        
       </div>
     </div>
   </div>
-
-
-  
-
+</section>
 
 
 
 
-
-
-</app-general-content>
-
-
-
-
-
-
+<app-footer-main></app-footer-main>

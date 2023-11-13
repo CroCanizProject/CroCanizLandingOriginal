@@ -177,6 +177,14 @@ export class ShoppingCarComponent implements AfterViewInit {
   }
 
 
+  removeProduct(index: any) {
+    // Asumiendo que `index` es la posición del producto que quieres eliminar
+    if (index >= 0 && index < this.listShoppingCar.length) {
+      this.listShoppingCar.splice(index, 1); // Elimina 1 elemento en la posición `index`
+      localStorage.setItem("carrito", JSON.stringify(this.listShoppingCar)); // Actualiza el carrito en el almacenamiento local
+    }
+  }
+
 
   // Shopping Car
 
@@ -199,6 +207,10 @@ export class ShoppingCarComponent implements AfterViewInit {
     return this.listShoppingCar.reduce((total, cartItem) => total + cartItem.cantidad, 0);
   }
 
+
+
+  // -************************ Subtotales
+
   calculateSubtotal(cartItem: any): number {
     return cartItem.cantidad * cartItem.item.price;
   }
@@ -206,4 +218,8 @@ export class ShoppingCarComponent implements AfterViewInit {
   getTotalSubtotales(): number {
     return this.listShoppingCar.reduce((total, cartItem) => total + this.calculateSubtotal(cartItem), 0);
   }
+
+
+
+
 }

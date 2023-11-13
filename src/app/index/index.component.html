@@ -1,191 +1,244 @@
-<app-general-content>
-
-    <!-- Start Hero Section -->
-    <div class="hero">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-5">
-                    <div class="intro-excerpt">
-                        <h1><span clsas="d-block">"Si a tu perro quieres feliz, dale una lombriz"</span></h1>
-                        <p class="mb-4">Comida para perro, realizada con materiales altamente saludable para tus caninos
-                        </p>
-                        <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#"
-                                class="btn btn-white-outline">Explore</a></p>
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="hero-img-wrap">
-                        <img src="../../assets/img/paseando-historia-papel-perros-civilizacion-humana-adoptar-no-comprar-poder-rescatar_481747-1608-removebg-preview.png"
-                            class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="hero_area">
+    <div class="bg-box">
+        <img src="../../assets/img/fondo.png" alt="">
     </div>
-    <!-- End Hero Section -->
+    <!-- header section strats -->
+    <app-header-main></app-header-main>
 
-
-    <!-- Start Product Section -->
-    <div class="product-section" *ngFor="let data of threeProducts">
-        <div class="container">
-            <div class="row">
-                <!-- Start Column 1 -->
-                <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-                    <h2 class="mb-4 section-title">Productos de calidad</h2>
-                    <p class="mb-4">Estamos comprometidos con tus mascotas, es por eso que contamos con los mejores
-                        ingredientes, con el objetivo que consientas a tus mejores amigos</p>
-                    <p><a href="shop.html" class="btn">Ver más</a></p>
-                </div>
-                <!-- End Column 1 -->
-
-                <!-- Start Column 2 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="cart.html">
-                        <img src="{{data.image.url}}" class="img-fluid product-thumbnail">
-                        <h2 class="product-title">{{data.name}}</h2>
-                        <h3 class="product-title">{{data.description}}</h3>
-                        <strong class="product-price">$ {{data.price}} MXN</strong>
-
-                        <span class="icon-cross">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="white"
-                                class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                            </svg>
-                        </span>
-                    </a>
-                </div>
-                <!-- End Column 2 -->
-            </div>
-        </div>
-    </div>
-    <!-- End Product Section -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Form to contact -->
-    <div class="untree_co-section">
-        <div class="container">
-
-            <div class="block">
-                <div class="row justify-content-center">
-
-
-                    <div class="col-md-8 col-lg-8 pb-4">
-
-
-                        <div class="row mb-5">
-                            <div class="col-lg-4">
-                                <div class="service no-shadow align-items-center link horizontal d-flex active"
-                                    data-aos="fade-left" data-aos-delay="0">
-                                    <div class="service-icon color-1 mb-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-                                        </svg>
-                                    </div> <!-- /.icon -->
-                                    <div class="service-contents">
-                                        <p>720, UTVT</p>
-                                    </div> <!-- /.service-contents-->
-                                </div> <!-- /.service -->
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="service no-shadow align-items-center link horizontal d-flex active"
-                                    data-aos="fade-left" data-aos-delay="0">
-                                    <div class="service-icon color-1 mb-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
-                                        </svg>
-                                    </div> <!-- /.icon -->
-                                    <div class="service-contents">
-                                        <p>cro-caniz@gmail.com</p>
-                                    </div> <!-- /.service-contents-->
-                                </div> <!-- /.service -->
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="service no-shadow align-items-center link horizontal d-flex active"
-                                    data-aos="fade-left" data-aos-delay="0">
-                                    <div class="service-icon color-1 mb-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                                        </svg>
-                                    </div> <!-- /.icon -->
-                                    <div class="service-contents">
-                                        <p>7224538732</p>
-                                    </div> <!-- /.service-contents-->
-                                </div> <!-- /.service -->
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class="slider_section " *ngIf="data">
+        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-7 col-lg-6 ">
+                                <div class="detail-box">
+                                    <h1>
+                                        Cro-Caniz
+                                    </h1>
+                                    <p>
+                                        Somos una empresa dedicada a la fabricación de productos para perros, con
+                                        ingredientes altamente validados por expertos
+                                    </p>
+                                    <!-- <div class="btn-box">
+                                        <a href="" class="btn1">
+                                            Order Now
+                                        </a>
+                                    </div> -->
+                                </div>
                             </div>
                         </div>
-
-                        <form [formGroup]="contactForm">
-                            <div class="row">
-                                <div class="col-6"
-                                    [class.error]="contactForm.get('name').dirty && contactForm.get('name').hasError('required')">
-                                    <div class="form-group">
-                                        <label class="text-black" for="name">Nombre completo</label>
-                                        <input formControlName="name" type="text" class="form-control" id="name">
-                                        <h2 *ngIf="contactForm.get('name').dirty && contactForm.get('name').hasError('required')"
-                                            class="error-message">Campo obligatorio</h2>
-                                    </div>
+                    </div>
+                </div>
+                <div class="carousel-item ">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-7 col-lg-6 ">
+                                <div class="detail-box">
+                                    <h1>
+                                        Nuestra Misión
+                                    </h1>
+                                    <p *ngFor="let itemMision of (data | keyvalue | slice:3:4)">
+                                        {{itemMision.value}}
+                                    </p>
+                                    <!-- <div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div> -->
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-7 col-lg-6 ">
+                                <div class="detail-box">
+                                    <h1>
+                                        Nuestra Visión
+                                    </h1>
+                                    <p *ngFor="let itemVision of (data | keyvalue | slice:4:5)">
+                                        {{itemVision.value}}
 
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label class="text-black" for="phone">Teléfono</label>
-                                        <input formControlName="phone" type="text" class="form-control" id="phone">
-                                    </div>
+                                    </p>
+
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="text-black" for="email">Correo electrónico</label>
-                                <input formControlName="email" type="email" class="form-control" id="email">
-                                <h2 *ngIf="contactForm.get('email').dirty && contactForm.get('email').hasError('required')"
-                                    class="error-message">Campo obligatorio</h2>
-                                <h2 *ngIf="contactForm.get('email').dirty && contactForm.get('email').hasError('email')"
-                                    class="error-message">Ingrese un correo electrónico válido</h2>
-                            </div>
-
-                            <div class="form-group mb-5">
-                                <label class="text-black" for="message">Mensaje</label>
-                                <textarea formControlName="message" name="" class="form-control" id="message" cols="30"
-                                    rows="5"></textarea>
-                                <h2 *ngIf="contactForm.get('message').dirty && contactForm.get('message').hasError('required')"
-                                    class="error-message">Campo obligatorio</h2>
-                            </div>
-
-                            <button (click)="onCreateContact()" type="submit"
-                                class="btn btn-primary-hover-outline">Enviar comentario</button>
-                        </form>
-
-
-
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <ol class="carousel-indicators">
+                    <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+                    <li data-target="#customCarousel1" data-slide-to="1"></li>
+                    <li data-target="#customCarousel1" data-slide-to="2"></li>
+                </ol>
+            </div>
         </div>
 
+    </section>
+    <!-- end slider section -->
+</div>
 
+
+
+
+
+<!-- Sección de productos -->
+
+
+<section class="food_section layout_padding-bottom">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+         ¡Nuestros Productos!
+        </h2>
+      </div>
+      <div class="filters-content">
+        <div class="row grid">
+          <div class="col-sm-6 col-lg-4" *ngFor="let data of threeProducts">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="{{data.image.url}}" alt="">
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    {{data.name}}
+                  </h5>
+                  <p>
+                    {{data.description}}
+                  </p>
+                  <div class="options">
+                    <h6>
+                      $ {{data.price}} MXN
+                    </h6>
+                    <!-- <a href="" (click)="">
+                        
+                      </a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-box">
+        <a href="">
+         Ver más
+        </a>
+      </div>
     </div>
+  </section>
 
-</app-general-content>
+
+
+
+
+
+  <!-- Sección de aplicación móvil -->
+
+  <section class="about_section layout_padding">
+    <div class="container  ">
+
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="../../assets/img/aplicacion.png" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                ¡Descarga nuestra aplicación!
+              </h2>
+            </div>
+            <ul class="list-unstyled custom-list my-4">
+                <li class="appCaracte">* Recordatorio de tiempos de comida para tus caninos</li>
+                <li class="appCaracte">* Calculadora de porciones de comida</li>
+                <li class="appCaracte">* Increíble impacto visual</li>
+                <li class="appCaracte">* Portable en tu celular</li>
+            </ul>
+            <a href="">
+                ¡Quiero probarla!
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+<!-- 
+  Sección para contactarnos -->
+
+  <section class="book_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          ¡Contáctanos!
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form_container">
+            <form [formGroup]="contactForm">
+                <div class="row">
+                    <div class="col-6"
+                        [class.error]="contactForm.get('name').dirty && contactForm.get('name').hasError('required')">
+                        <div class="form-group">
+                            <label class="text-black" for="name">Nombre completo</label>
+                            <input formControlName="name" type="text" class="form-control" id="name">
+                            <h2 *ngIf="contactForm.get('name').dirty && contactForm.get('name').hasError('required')"
+                                class="error-message">Campo obligatorio</h2>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="text-black" for="phone">Teléfono</label>
+                            <input formControlName="phone" type="text" class="form-control" id="phone">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="text-black" for="email">Correo electrónico</label>
+                    <input formControlName="email" type="email" class="form-control" id="email">
+                    <h2 *ngIf="contactForm.get('email').dirty && contactForm.get('email').hasError('required')"
+                        class="error-message">Campo obligatorio</h2>
+                    <h2 *ngIf="contactForm.get('email').dirty && contactForm.get('email').hasError('email')"
+                        class="error-message">Ingrese un correo electrónico válido</h2>
+                </div>
+
+                <div class="form-group mb-5">
+                    <label class="text-black" for="message">Mensaje</label>
+                    <textarea formControlName="message" name="" class="form-control" id="message" cols="30"
+                        rows="5"></textarea>
+                    <h2 *ngIf="contactForm.get('message').dirty && contactForm.get('message').hasError('required')"
+                        class="error-message">Campo obligatorio</h2>
+                </div>
+
+                <button (click)="onCreateContact()" type="submit"
+                    class="btn btn-primary-hover-outline">Enviar comentario</button>
+            </form>
+
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="map_container ">
+           <img src="../../assets/img/perritos.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <app-footer-main></app-footer-main>

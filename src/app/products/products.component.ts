@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from '../services/products.service';
 import { Shopping } from '../interfaces/Shoppoing';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ProductsComponent {
 
     this.producto.getProductos().subscribe((response) => {
       this.product = response.data;
-      // console.log(this.product = response.data);
+      console.log(this.product = response.data);
     });
     const shoppingStorage = localStorage.getItem("carrito");
   if (shoppingStorage) {
@@ -43,6 +44,16 @@ export class ProductsComponent {
   
     // Actualizar el carrito en el almacenamiento local.
     localStorage.setItem("carrito", JSON.stringify(this.carrito));
+
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Producto añadido a tu carrito",
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+
   }
   
 

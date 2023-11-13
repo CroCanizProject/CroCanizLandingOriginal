@@ -22,7 +22,7 @@ export class ProductsService {
 
   
   getThreeProducts(): Observable<any> {
-    return this.http.get(environment.url + "products?limit=2" );
+    return this.http.get(environment.url + "products?limit=6" );
   }
 
 

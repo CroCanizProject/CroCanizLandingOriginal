@@ -38,14 +38,6 @@ export class IndexComponent {
   }
 
 
-
-
-
-
-
-
-
-
   onCreateContact() {
     if (this.contactForm.valid) {
       Swal.fire({

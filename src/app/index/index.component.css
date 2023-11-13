@@ -2,3 +2,15 @@
     color: red;
   }
   
+
+  .appTitle{
+    font-size: 50px;
+    color: white;
+    text-align: center;
+  }
+
+  .appCaracte{
+    font-size: 15px;
+    color: white;
+    text-align: justify;
+  }
