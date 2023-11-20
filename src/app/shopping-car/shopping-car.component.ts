@@ -12,7 +12,7 @@ import { catchError, concatMap, of, switchMap } from 'rxjs';
 
 declare global {
   interface Window {
-    example: any; // 👈️ turn off type checking
+    example: any; 
   }
 }
 
@@ -31,10 +31,10 @@ export class ShoppingCarComponent implements AfterViewInit {
 
 
   // carrito de compras
-  private items: { id: number; cantidad: number }[] = []; // Agrega los productos aquí
+  private items: { id: number; cantidad: number }[] = [];
   listShoppingCar: any[] = [];
   carrito: any[] = [];
-  //
+  
 
   constructor(private ngZone: NgZone, private sales: SalesService) {
 
@@ -102,6 +102,8 @@ export class ShoppingCarComponent implements AfterViewInit {
             console.log(complete)
 
             this.callValidateCheckTwo(complete)
+
+
             // this.sales.second(complete).subscribe({
             //   next:(next=>{
             //     console.log(next)
@@ -165,7 +167,6 @@ export class ShoppingCarComponent implements AfterViewInit {
 
 
   ngOnInit(): void {
-    // this.invokeStripe();
     this.loadShoppingCart();
   }
 

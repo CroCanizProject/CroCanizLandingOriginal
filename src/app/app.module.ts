@@ -11,6 +11,7 @@ import { IndexComponent } from './index/index.component';
 import { HeaderMainComponent } from './header-main/header-main.component';
 import { FooterMainComponent } from './footer-main/footer-main.component';
 import { GeneralContentComponent } from './general-content/general-content.component';
+import { ProcessGeneralComponent } from './process-general/process-general.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { GeneralContentComponent } from './general-content/general-content.compo
     HeaderMainComponent,
     FooterMainComponent,
     GeneralContentComponent,
+    ProcessGeneralComponent,
   ],
   imports: [
     BrowserModule,

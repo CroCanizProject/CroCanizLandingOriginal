@@ -1,6 +1,6 @@
 <app-header-main></app-header-main>
 
-<div class="card">
+<div class="card" *ngIf="listShoppingCar.length > 0">
   <h3>  <strong class="text-black">Cantidad de productos: {{getTotalCantidadProductos()}}</strong></h3>
   <h3>  <strong class="text-black"> Total a pagar: $ {{getTotalSubtotales()}} MXN </strong></h3>
 
@@ -19,7 +19,7 @@
 
 
 
-<section class="food_section layout_padding-bottom">
+<section class="food_section layout_padding-bottom" *ngIf="listShoppingCar.length > 0">
   <div class="container">
     <div class="heading_container heading_center">
       <h2>
@@ -73,6 +73,11 @@
   </div>
 </section>
 
+<div *ngIf="listShoppingCar.length === 0" style="text-align: center;">
+  <h4>El carrito de compras está vacío. Revisa nuestros productos</h4>
+  <button class="btn btn-warning" routerLink="/productos" >Revisar productos</button>
+  <img src="../../assets/img/carrito_vacio.png" class="img-fluid" alt="Carrito Vacío">
+</div>
 
 
 
