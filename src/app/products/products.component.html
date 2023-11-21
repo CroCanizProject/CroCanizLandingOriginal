@@ -6,7 +6,19 @@
        ¡Nuestros Productos!
       </h2>
     </div>
-    <div class="filters-content">
+
+    <div class="filters-content" *ngIf="cargando">
+      <div class="container" *ngIf="cargando">
+        <div class="heading_container heading_center">
+          <div class="filters-content">
+            <h3>Cargando productos...</h3>
+            <img src="../../assets/img/spinner4.gif" class="img-fluid" alt="cargando información...">
+          </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="filters-content" *ngIf="!cargando">
       <div class="row grid">
         <div class="col-sm-6 col-lg-4" *ngFor="let data of product">
           <div class="box">

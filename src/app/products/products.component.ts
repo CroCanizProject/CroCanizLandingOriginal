@@ -16,7 +16,7 @@ export class ProductsComponent {
 
   product: any;
   carrito: any[] = [];
-
+  cargando: boolean = true;
 
   ngOnInit():void {
   
@@ -24,7 +24,12 @@ export class ProductsComponent {
 
     this.producto.getProductos().subscribe((response) => {
       this.product = response.data;
-      console.log(this.product = response.data);
+      this.cargando = false;
+      // console.log(this.product = response.data);
+    },
+    (error)=>{
+      console.log(error)
+      this.cargando
     });
     const shoppingStorage = localStorage.getItem("carrito");
   if (shoppingStorage) {

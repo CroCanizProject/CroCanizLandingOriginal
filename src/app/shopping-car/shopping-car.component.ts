@@ -58,99 +58,94 @@ export class ShoppingCarComponent implements AfterViewInit {
     }
   }
 
-
+  confirmarCompra() {
+    Swal.fire({
+      title: "¿Estás seguro de continuar con la compra?",
+      text: "Se harán cargos a la tarjeta ingresada",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, deseo continuar"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const items = this.listShoppingCar.map(items => {
+          return {
+            id: items.item.id,
+            cantidad: items.cantidad
+          };
+        });
   
-  async onClick() {
-    const items = this.listShoppingCar.map(items => {
-      return {
-        id: items.item.id,
-        cantidad: items.cantidad
-      };
-    });
+        const requestData = {
+          items: items
+        };
   
-    const requestData = {
-      items: items
-    };
+        const { token, error } = await stripe.createToken(this.card);
   
-    const { token, error } = await stripe.createToken(this.card);
-  
-    interface ApiResponse {
-      client_secret: any;
-      total: number;
-    }
-  
-    if (token) {
-      
-
-      this.sales.validateCheck(requestData).subscribe({
-        next:(res:any)=>{
-          const startPosition = 0;
-          const endPosition = 26;
-
-          if (startPosition >= 0 && endPosition >= startPosition && endPosition < res.client_secret.length) {
-            // Corta la cadena desde la posición inicial hasta la posición final
-            const truncatedClientSecret = res.client_secret.substring(startPosition, endPosition + 1);
-          
-            console.log("client_secret truncado:", truncatedClientSecret);
-
-            const complete = {
-              paymentIntent: (truncatedClientSecret).toString(), 
-              return_url: "https://web.whatsapp.com/",
-              payment_method: "pm_card_visa"
-            };
-
-            console.log(complete)
-
-            this.callValidateCheckTwo(complete)
-
-
-            // this.sales.second(complete).subscribe({
-            //   next:(next=>{
-            //     console.log(next)
-            //   })
-            // })
-
-
-          } else {
-            console.log("Las posiciones especificadas no son válidas.");
-          }
-
-
-
+        interface ApiResponse {
+          client_secret: any;
+          total: number;
         }
-      })
-
-
-
   
-      // this.sales.validateCheck(requestData).subscribe({
-      //   next: (res: ApiResponse) => {
-      //     complete.paymentIntent = res.client_secret;
+        if (token) {
+          this.sales.validateCheck(requestData).subscribe({
+            next: (res: any) => {
+              const startPosition = 0;
+              const endPosition = 26;
   
-      //     this.sales.second(complete).subscribe({
-      //       next: (res: any) => {
-      //         if (res.payment_intent && res.payment_intent.id) {
-      //           const paymentIntentId = res.payment_intent.id;
-      //           console.log("ID del payment_intent:", paymentIntentId);
-      //           // Aquí puedes usar paymentIntentId como necesites
-      //         } else {
-      //           console.log("No se encontró el ID del payment_intent en la respuesta de validateChecktwo.");
-      //         }
-      //       },
-      //       error: (error) => {
-      //         console.log("Error en validateChecktwo:", error);
-      //       }
-      //     });
-      //   },
-      //   error: (error) => {
-      //     console.log("Error en validateCheck:", error);
-      //   }
-      // });
-    } else {
-      this.ngZone.run(() => this.cardError = error.message);
-    }
+              if (startPosition >= 0 && endPosition >= startPosition && endPosition < res.client_secret.length) {
+                const truncatedClientSecret = res.client_secret.substring(startPosition, endPosition + 1);
+                console.log("client_secret truncado:", truncatedClientSecret);
+  
+                const complete = {
+                  paymentIntent: truncatedClientSecret.toString(),
+                  return_url: "https://web.whatsapp.com/",
+                  payment_method: "pm_card_visa"
+                };
+  
+                console.log(complete);
+  
+                this.callValidateCheckTwo(complete);
+  
+                Swal.fire({
+                  title: "¡Gracias por tu compra!",
+                  width: 450,
+                  padding: "3em",
+                  color: "#716add",
+                  background: "#fff url(/assets/img/fondoPerros.png)",
+                  backdrop: `
+                    rgba(0,0,123,0.4)
+                    url("/assets/img/perritoCarro.gif")
+                    left top
+                    no-repeat
+                  `
+                });
+
+                this.emptyShoppingCar()
+
+
+              } else {
+                console.log("Las posiciones especificadas no son válidas.");
+              }
+            }
+          });
+        } else {
+          this.ngZone.run(() => this.cardError = error.message);
+        }
+      }
+    });
   }
+
+  onClick() {
+  this.confirmarCompra();
+}
   
+emptyShoppingCar() {
+  localStorage.clear();
+  this.listShoppingCar = [];
+
+}
+
   
   callValidateCheckTwo(data) {
     this.sales.second(data).subscribe({
@@ -179,10 +174,9 @@ export class ShoppingCarComponent implements AfterViewInit {
 
 
   removeProduct(index: any) {
-    // Asumiendo que `index` es la posición del producto que quieres eliminar
     if (index >= 0 && index < this.listShoppingCar.length) {
-      this.listShoppingCar.splice(index, 1); // Elimina 1 elemento en la posición `index`
-      localStorage.setItem("carrito", JSON.stringify(this.listShoppingCar)); // Actualiza el carrito en el almacenamiento local
+      this.listShoppingCar.splice(index, 1);
+      localStorage.setItem("carrito", JSON.stringify(this.listShoppingCar));
     }
   }
 

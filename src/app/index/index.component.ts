@@ -12,11 +12,14 @@ import Swal from 'sweetalert2';
 })
 export class IndexComponent {
 
+  mostrarSpinner: boolean = false;
+
   constructor(private fb: FormBuilder, private generalI: CompanyInformationService, private productos: ProductsService) { }
 
   data: any;
   threeProducts: any;
   contactForm!: FormGroup;
+  cargando: boolean = true;
 
   ngOnInit() {
 
@@ -30,11 +33,24 @@ export class IndexComponent {
 
     this.generalI.getGeneralInformation().subscribe((response) => {
       this.data = response.data
-    });
+      this.cargando = false;
+    },
+      (error)=>{
+        console.log(error)
+        this.cargando = false;
+      }
+      );
 
     this.productos.getThreeProducts().subscribe((response) => {
       this.threeProducts = response.data
-    });
+      this.cargando = false;
+      // this.mostrarSpinner = false;
+    },
+      (error)=>{
+        console.log(error)
+        this.mostrarSpinner = false;
+      }
+    );
   }
 
 
