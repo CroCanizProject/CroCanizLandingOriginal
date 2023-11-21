@@ -15,6 +15,29 @@ declare global {
     example: any; 
   }
 }
+export class FormData {
+  selectedCountry: string;
+  selectedState: string;
+  selectedCity: string;
+}
+
+interface Resp {
+  auth_token: any;
+}
+interface Countries {
+  country_name: any;
+  country_short_name: any;
+  country_phone_code: any
+}
+
+interface States {
+  state_name: any
+}
+
+interface Cities {
+  city_name: any
+}
+
 
 @Component({
   selector: 'app-shopping-car',
@@ -23,17 +46,41 @@ declare global {
 })
 
 
+
 export class ShoppingCarComponent implements AfterViewInit {
+  formData: FormData = new FormData();
 
   @ViewChild('cardInfo') cardInfo: ElementRef;
   cardError: String;
   card: any;
 
 
+
+
   // carrito de compras
   private items: { id: number; cantidad: number }[] = [];
   listShoppingCar: any[] = [];
   carrito: any[] = [];
+   //Get Location
+
+  countriesResponse: string[] =[];
+  stateResponse: string[] =[];
+  citiesResponse:string[] =[];
+
+
+ selectedCountry: any; 
+ selectedState:any;
+  selectedCity:any;
+   //Variables de la venta
+  calle: any;
+  numero: any;
+  colonia: any;
+  codigoPostal: any;
+
+  mostrarFormularioDos: boolean = false;
+
+
+
   
 
   constructor(private ngZone: NgZone, private sales: SalesService) {
@@ -44,9 +91,15 @@ export class ShoppingCarComponent implements AfterViewInit {
     this.card = elements.create('card');
     this.card.mount(this.cardInfo.nativeElement);
     this.card.addEventListener('change', this.onChange.bind(this));
+    this.getCountries();
 
   }
 
+
+  onCompleteFormularioUno() {
+
+    this.mostrarFormularioDos = true;
+  }
 
 
   onChange({ error }) {
@@ -139,6 +192,7 @@ export class ShoppingCarComponent implements AfterViewInit {
   onClick() {
   this.confirmarCompra();
 }
+
   
 emptyShoppingCar() {
   localStorage.clear();
@@ -158,6 +212,84 @@ emptyShoppingCar() {
       }
     });
   }
+
+  getCountries() {
+    this.sales.getLocation().subscribe(
+      (response: Resp) => {
+        this.sales.getCountry(response.auth_token).subscribe(
+          (countries: Countries[]) => {
+            this.countriesResponse = countries.map((country) => country.country_name);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+    onCountryChange() {
+      if (this.selectedCountry) {
+        this.sales.getLocation().subscribe(
+          (response: Resp) => {
+            this.sales.getStates(response.auth_token, this.selectedCountry).subscribe(
+              (states: States[]) => {
+                this.stateResponse = states.map((state) => state.state_name);
+                // Limpiar las ciudades cuando cambia el país
+                this.citiesResponse = [];
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.stateResponse = [];
+        this.citiesResponse = [];
+      }
+    }
+    
+    onStateChange() {
+      if (this.selectedCountry && this.selectedState) {
+        console.log('Selected Country:', this.selectedCountry);
+        console.log('Selected State:', this.selectedState);
+    
+        this.sales.getLocation().subscribe(
+          (response: Resp) => {
+            console.log('Response from getLocation:', response);
+    
+            this.sales.getCities(response.auth_token, this.selectedCountry).subscribe(
+              (cities: Cities[]) => {
+                console.log('Cities received:', cities);
+    
+                // Verifica que cities tenga datos
+                if (cities && cities.length > 0) {
+                  console.log('Updating cities in component:', cities);
+                  this.citiesResponse = cities.map((city) => city.city_name);
+                } else {
+                  console.log('No cities received from the service.');
+                }
+              },
+              (error) => {
+                console.log('Error getting cities:', error);
+              }
+            );
+          },
+          (error) => {
+            console.log('Error getting location:', error);
+          }
+        );
+      } else {
+        this.citiesResponse = [];
+      }
+    }
   
 
 
