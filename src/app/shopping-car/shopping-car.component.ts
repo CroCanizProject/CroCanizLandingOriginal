@@ -72,19 +72,28 @@ export class ShoppingCarComponent implements AfterViewInit {
  selectedState:any;
   selectedCity:any;
    //Variables de la venta
-  calle: any;
-  numero: any;
-  colonia: any;
-  codigoPostal: any;
+   street: any;
+   number: any;
+   colony: any;
+   zip_code: any;
 
   mostrarFormularioDos: boolean = false;
 
-
+  formularioUnoForm: FormGroup;
 
   
 
-  constructor(private ngZone: NgZone, private sales: SalesService) {
-
+  constructor(private ngZone: NgZone, private sales: SalesService,private formBuilder: FormBuilder) {
+    // this.formularioUnoForm = this.formBuilder.group({
+    //   street: ['', Validators.required],
+    //   number: ['', Validators.required],
+    //   colony: ['', Validators.required],
+    //   zip_code: ['', Validators.required],
+    //   selectCountry: ['', Validators.required],
+    //   selectState: ['', Validators.required],
+    //   municipality: ['', Validators.required],
+   
+    // });
   }
 
   ngAfterViewInit(): void {
@@ -96,10 +105,7 @@ export class ShoppingCarComponent implements AfterViewInit {
   }
 
 
-  onCompleteFormularioUno() {
-
-    this.mostrarFormularioDos = true;
-  }
+  
 
 
   onChange({ error }) {
@@ -121,7 +127,13 @@ export class ShoppingCarComponent implements AfterViewInit {
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, deseo continuar"
     }).then(async (result) => {
+
+      
+      
+      
+
       if (result.isConfirmed) {
+
         const items = this.listShoppingCar.map(items => {
           return {
             id: items.item.id,
@@ -155,10 +167,23 @@ export class ShoppingCarComponent implements AfterViewInit {
                   return_url: "https://web.whatsapp.com/",
                   payment_method: "pm_card_visa"
                 };
+
+                const formularioValues = {
+                  street: this.street,
+                  number: this.number,
+                  colony: this.colony,
+                  zip_code: this.zip_code,
+                  // selectedCountry: this.selectedCountry,
+                  state: this.selectedState,
+                  municipality: this.selectedCity,
+                  paymentIntent: complete.paymentIntent,
+                  items: items
+                };
   
-                console.log(complete);
+                console.log(formularioValues);
   
                 this.callValidateCheckTwo(complete);
+                this.callFillForm(formularioValues)
   
                 Swal.fire({
                   title: "¡Gracias por tu compra!",
@@ -193,6 +218,7 @@ export class ShoppingCarComponent implements AfterViewInit {
   this.confirmarCompra();
 }
 
+
   
 emptyShoppingCar() {
   localStorage.clear();
@@ -203,6 +229,18 @@ emptyShoppingCar() {
   
   callValidateCheckTwo(data) {
     this.sales.second(data).subscribe({
+      next: (res) => {
+        console.log("DONE!!!!!", res);
+      },
+      error: (error) => {
+        console.log("Error en validateCheckTwo:", error);
+        // Aquí puedes agregar código adicional para registrar el error o manejarlo de otra manera.
+      }
+    });
+  }
+
+  callFillForm(data1){
+    this.sales.addSale(data1).subscribe({
       next: (res) => {
         console.log("DONE!!!!!", res);
       },
@@ -346,6 +384,8 @@ emptyShoppingCar() {
     return this.listShoppingCar.reduce((total, cartItem) => total + this.calculateSubtotal(cartItem), 0);
   }
 
+
+ 
 
 
 
