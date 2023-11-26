@@ -10,6 +10,22 @@ body {
   padding: 0;
 }
 
+
+@media (max-width: 767px) {
+  .custom-carousel-img h1,
+  .custom-carousel-img p {
+    text-align: center; /* Ajusta la alineación según sea necesario */
+  }
+}
+
+/* Espaciado alrededor del texto en dispositivos móviles */
+@media (max-width: 767px) {
+.custom-carousel-img h1,
+.custom-carousel-img p {
+  margin: 10px; /* Ajusta el margen según sea necesario */
+}
+}
+
 .layout_padding {
   padding: 90px 0;
 }
