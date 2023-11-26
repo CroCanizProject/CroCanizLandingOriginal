@@ -1,0 +1,22 @@
+.navbar {
+    transition: background-color 0.3s;
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #ffd700; /* Color dorado para el ícono del botón */
+  }
+  
+  .navbar-brand,
+  .navbar-nav a {
+    color: #fff; /* Texto blanco para los elementos de navegación */
+  }
+  
+  .navbar-nav a:hover {
+    color: #ffd700; /* Texto dorado al pasar el ratón */
+  }
+  
+  .navbar-toggler:focus,
+  .navbar-toggler:hover {
+    background-color: #ffd700; /* Fondo dorado al pasar el ratón sobre el botón de navegación en dispositivos móviles */
+  }
+  

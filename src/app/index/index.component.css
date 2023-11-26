@@ -23,3 +23,8 @@
     height: 40px;
     animation: spin 1s linear infinite;
   }
+
+  .custom-carousel-img {
+    height: 300px; /* Ajusta la altura según tus necesidades */
+    object-fit: cover; /* Evita que la imagen se deforme */
+  }

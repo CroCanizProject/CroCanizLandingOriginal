@@ -13,6 +13,7 @@ const ROUTES:Routes = [
   {path: 'productos', component: ProductsComponent},
   {path: 'carrito', component: ShoppingCarComponent},
   {path: 'proceso', component: ProcessGeneralComponent},
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 
   // {path: 'checkout/:id', ShoppingCarComponent}
 ]

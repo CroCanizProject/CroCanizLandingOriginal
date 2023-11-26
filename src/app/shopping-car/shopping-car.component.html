@@ -10,21 +10,27 @@
       <div class="input-group mb-3">
         <span class="input-group-text" id="street" name="street">Calle</span>
         <input type="text" class="form-control" [(ngModel)]="street" aria-label="Calle" aria-describedby="inputGroup-sizing-default">
+        <div style="color: red;" *ngIf="!validateNotEmpty(street)" class="error-message"> * Campo obligatorio</div>
       </div>
 
       <div class="input-group mb-3">
         <span class="input-group-text" id="number" name="number">Número</span>
-        <input type="text" class="form-control" [(ngModel)]="number" aria-label="Número" aria-describedby="inputGroup-sizing-default">
+        <input type="number" class="form-control" [(ngModel)]="number" aria-label="Número" aria-describedby="inputGroup-sizing-default">
+        <div style="color: red;" *ngIf="!validateNotEmpty(number)" class="error-message"> * Campo obligatorio</div>
+
       </div>
 
       <div class="input-group mb-3">
         <span class="input-group-text" id="colony" name="colony">Colonia</span>
         <input type="text" class="form-control" [(ngModel)]="colony" aria-label="Colonia" aria-describedby="inputGroup-sizing-default">
+        <div style="color: red;" *ngIf="!validateNotEmpty(colony)" class="error-message"> * Campo obligatorio</div>
+
       </div>
 
       <div class="input-group mb-3">
         <span class="input-group-text" id="zip_code" name="zip_code">Código Postal</span>
-        <input type="text" class="form-control" [(ngModel)]="zip_code" aria-label="Código Postal" aria-describedby="inputGroup-sizing-default">
+        <input type="number" class="form-control" [(ngModel)]="zip_code" aria-label="Código Postal" aria-describedby="inputGroup-sizing-default">
+        <div style="color: red;" *ngIf="!validateNotEmpty(zip_code)" class="error-message"> * Campo obligatorio</div>
       </div>
     </div>
 
@@ -36,6 +42,8 @@
           <option selected disabled>Selecciona un país</option>
           <option *ngFor="let pais of countriesResponse" [value]="pais">{{ pais }}</option>
         </select>
+        <div style="color: red;" *ngIf="!validateNotEmpty(selectedCountry)" class="error-message"> * Campo obligatorio</div>
+
       </div>
 
       <div class="mb-3">
@@ -44,6 +52,8 @@
           <option selected disabled>Selecciona un estado</option>
           <option *ngFor="let estado of stateResponse" [value]="estado">{{ estado }}</option>
         </select>
+        <div style="color: red;" *ngIf="!validateNotEmpty(selectedState)" class="error-message"> * Campo obligatorio</div>
+
       </div>
 
       <div class="mb-3">
@@ -52,6 +62,8 @@
           <option selected disabled>Selecciona una ciudad</option>
           <option *ngFor="let ciudad of citiesResponse" [value]="ciudad">{{ ciudad }}</option>
         </select>
+        <div style="color: red;" *ngIf="!validateNotEmpty(selectedCity)" class="error-message"> * Campo obligatorio</div>
+
       </div>
     </div>
   </div>

@@ -104,6 +104,19 @@ export class ShoppingCarComponent implements AfterViewInit {
 
   }
 
+  validateNotEmpty(value: string): boolean {
+    return value && value.trim() !== '';
+  }
+
+  validateSelected(value: string): boolean {
+    return value && value !== 'Selecciona una opción';
+  }
+
+  // Función para validar el código postal
+  validateZipCode(value: string): boolean {
+    // Puedes agregar una lógica más específica si es necesario
+    return /^[0-9]{5}$/.test(value);
+  }
 
   
 
@@ -230,7 +243,7 @@ emptyShoppingCar() {
   callValidateCheckTwo(data) {
     this.sales.second(data).subscribe({
       next: (res) => {
-        console.log("DONE!!!!!", res);
+        // console.log("DONE!!!!!", res);
       },
       error: (error) => {
         console.log("Error en validateCheckTwo:", error);
@@ -242,7 +255,7 @@ emptyShoppingCar() {
   callFillForm(data1){
     this.sales.addSale(data1).subscribe({
       next: (res) => {
-        console.log("DONE!!!!!", res);
+        // console.log("DONE!!!!!", res);
       },
       error: (error) => {
         console.log("Error en validateCheckTwo:", error);
@@ -296,12 +309,12 @@ emptyShoppingCar() {
     
     onStateChange() {
       if (this.selectedCountry && this.selectedState) {
-        console.log('Selected Country:', this.selectedCountry);
-        console.log('Selected State:', this.selectedState);
+        // console.log('Selected Country:', this.selectedCountry);
+        // console.log('Selected State:', this.selectedState);
     
         this.sales.getLocation().subscribe(
           (response: Resp) => {
-            console.log('Response from getLocation:', response);
+            // console.log('Response from getLocation:', response);
     
             this.sales.getCities(response.auth_token, this.selectedCountry).subscribe(
               (cities: Cities[]) => {
@@ -309,7 +322,7 @@ emptyShoppingCar() {
     
                 // Verifica que cities tenga datos
                 if (cities && cities.length > 0) {
-                  console.log('Updating cities in component:', cities);
+                  // console.log('Updating cities in component:', cities);
                   this.citiesResponse = cities.map((city) => city.city_name);
                 } else {
                   console.log('No cities received from the service.');

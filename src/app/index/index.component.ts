@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators,ValidatorFn,AbstractControl } from '@angular/forms';
 import { CompanyInformationService } from '../services/company-information.service';
 import { ProductsService } from '../services/products.service';
 import Swal from 'sweetalert2';
@@ -25,10 +25,10 @@ export class IndexComponent {
 
 
     this.contactForm = this.fb.group({
-      name: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: ['', Validators.required],
-      message: ['', Validators.required],
+      name: ['', [Validators.required, this.onlyLettersValidator()]],
+      phone: ['', [Validators.required, this.onlyNumbersValidator(), Validators.maxLength(10), Validators.minLength(10)]],
+      email: ['', [Validators.required, Validators.email]],
+      message: ['', Validators.required,Validators.minLength(10), Validators.maxLength(100)],
     })
 
     this.generalI.getGeneralInformation().subscribe((response) => {
@@ -54,7 +54,36 @@ export class IndexComponent {
   }
 
 
+  onlyLettersValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    const onlyLetters = /^[a-zA-Z\s]*$/; // Expresión regular que permite solo letras y espacios
+
+    if (value && !onlyLetters.test(value)) {
+      return { 'onlyLetters': true };
+    }
+
+    return null;
+  };
+}
+
+ onlyNumbersValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    const onlyNumbers = /^[0-9]*$/; // Expresión regular que permite solo números
+
+    if (value && !onlyNumbers.test(value)) {
+      return { 'onlyNumbers': true };
+    }
+
+    return null;
+  };
+}
+
+
   onCreateContact() {
+    this.contactForm.markAllAsTouched();
+
     if (this.contactForm.valid) {
       Swal.fire({
         title: '¿Estas seguro de enviar los datos?',
