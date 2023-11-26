@@ -25,3 +25,23 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
+
+/* Agrega estos estilos para el botón flotante */
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #E20D77; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none;
+    border-radius: 50%; /* Hace que el botón sea redondo */
+    padding: 15px; /* Espaciado interno del botón */
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del botón */
+}
+
+/* Agrega estos estilos para darle efecto al botón al pasar el ratón sobre él */
+.floating-button:hover {
+    background-color: #b90d63; /* Cambia el color de fondo al pasar el ratón */
+}

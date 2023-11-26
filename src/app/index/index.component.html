@@ -13,7 +13,7 @@
       <img src="../../assets/img/carrusel3.webp" class="d-block w-100 custom-carousel-img" alt="Slide 2">
       <div class="carousel-caption">
         <h1>Nuestra Misión</h1>
-        <h5>{{ data.mision }}</h5>
+        <p>{{ data.mision }}</p>
       </div>
     </div>
     <div class="carousel-item">
@@ -94,7 +94,10 @@
     </div>
     <div class="btn-box">
       <a href="/productos">
-        Ver más
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        </svg> 
+        Ver más 
       </a>
     </div>
   </div>
@@ -154,30 +157,32 @@
       <div class="col-md-6">
         <div class="form_container">
           <form [formGroup]="contactForm" (ngSubmit)="onCreateContact()">
-            <div class="row"[class.error]="contactForm.get('name').dirty && contactForm.get('name').hasError('required')">
-              
-                <div class="form-group">
-                  <label class="text-black" for="name">Nombre completo</label>
-                  <input formControlName="name" type="text" class="form-control" id="name">
-                  <h6 *ngIf="contactForm.get('name').touched && contactForm.get('name').hasError('required')"
-                  class="error-message">* Campo obligatorio</h6>
-                  <h6 *ngIf="contactForm.get('name').hasError('onlyLetters')"
-                  class="error-message">Solo se permiten letras y espacios</h6>
-                </div>
+            <div class="row"
+              [class.error]="contactForm.get('name').dirty && contactForm.get('name').hasError('required')">
 
+              <div class="form-group">
+                <label class="text-black" for="name">Nombre completo</label>
+                <input formControlName="name" type="text" class="form-control" id="name">
+                <h6 *ngIf="contactForm.get('name').touched && contactForm.get('name').hasError('required')"
+                  class="error-message">* Campo obligatorio</h6>
+                <h6 *ngIf="contactForm.get('name').hasError('onlyLetters')" class="error-message">Solo se permiten
+                  letras y espacios</h6>
               </div>
-          
-              <div [class.error]="contactForm.get('phone').touched && (contactForm.get('phone').hasError('required') || contactForm.get('phone').hasError('onlyNumbers'))">
-                <div class="form-group">
-                  <label class="text-black" for="phone">Teléfono</label>
-                  <input formControlName="phone" type="text" class="form-control" id="phone">
-                  <h6 *ngIf="contactForm.get('phone').touched && contactForm.get('phone').hasError('required')"
-                    class="error-message">Campo obligatorio, los caracteres son mínimo y máximo 10</h6>
-                  <h6 *ngIf="contactForm.get('phone').hasError('onlyNumbers')"
-                    class="error-message">Solo se permiten números</h6>
-                </div>
+
+            </div>
+
+            <div
+              [class.error]="contactForm.get('phone').touched && (contactForm.get('phone').hasError('required') || contactForm.get('phone').hasError('onlyNumbers'))">
+              <div class="form-group">
+                <label class="text-black" for="phone">Teléfono</label>
+                <input formControlName="phone" type="text" class="form-control" id="phone">
+                <h6 *ngIf="contactForm.get('phone').touched && contactForm.get('phone').hasError('required')"
+                  class="error-message">Campo obligatorio, los caracteres son mínimo y máximo 10</h6>
+                <h6 *ngIf="contactForm.get('phone').hasError('onlyNumbers')" class="error-message">Solo se permiten
+                  números</h6>
               </div>
-           
+            </div>
+
             <div class="form-group">
               <label class="text-black" for="email">Correo electrónico</label>
               <input formControlName="email" type="email" class="form-control" id="email">
@@ -191,7 +196,7 @@
               <label class="text-black" for="message">Mensaje</label>
               <textarea formControlName="message" name="" class="form-control" id="message" cols="30"
                 rows="5"></textarea>
-                <h6 *ngIf="contactForm.get('message').touched && contactForm.get('message').hasError('required')"
+              <h6 *ngIf="contactForm.get('message').touched && contactForm.get('message').hasError('required')"
                 class="error-message">* Campo obligatorio, como mínimo 10 y hasta 100 caracteres</h6>
             </div>
 
