@@ -10,6 +10,11 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+.error-message{
+    color: #E20D77;
+    font-size: medium;
+}
+
 
 .card{
     padding: 50px;

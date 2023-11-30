@@ -15,7 +15,7 @@ export class SalesService {
   private token = 'DOdrhtfoqS798-H0LZQX2zm6kG40xJFud5VuBsncgb08STjKi0b9Z5UTl6p6vNa0MCE'; 
   private userEmail = 'arturo3694587210@gmail.com'
   private countries = 'https://www.universal-tutorial.com/api/countries/'
-  private states = 'https://www.universal-tutorial.com/api/states/'
+  private states = 'https://www.universal-tutorial.com/api/states/Mexico'
   private cities = 'https://www.universal-tutorial.com/api/cities/'
 
   addSale(data:any){
@@ -49,14 +49,20 @@ export class SalesService {
            return this.http.get(this.countries, { headers })
        
      }
-             getStates(mainToken:any, countrie:any){
+
+
+    getStates(mainToken:any){
        const headers = new HttpHeaders({
          "Authorization": "Bearer " + mainToken,
          "Accept": "application/json"
        });
-           const url = `${this.states}${countrie}`;
+
+           const url = `${this.states}`;
            return this.http.get(url , { headers })
      }
+
+
+
          getCities(mainToken:any, state:any){
        const headers = new HttpHeaders({
          "Authorization": "Bearer " + mainToken,

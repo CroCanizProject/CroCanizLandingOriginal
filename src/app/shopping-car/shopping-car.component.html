@@ -7,87 +7,83 @@
   <!-- Dirección -->
   <div class="row">
     <div class="col-md-6">
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="street" name="street">Calle</span>
-        <input type="text" class="form-control" [(ngModel)]="street" aria-label="Calle" aria-describedby="inputGroup-sizing-default">
-        <div style="color: red;" *ngIf="!validateNotEmpty(street)" class="error-message"> * Campo obligatorio</div>
+      <div class="mb-3">
+        <label for="street" class="form-label">Calle</label>
+        <input type="text" class="form-control" [(ngModel)]="street" id="street" required>
+        <div *ngIf="!validateNotEmpty(street)" class="error-message"> * Campo obligatorio</div>
       </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="number" name="number">Número</span>
-        <input type="number" class="form-control" [(ngModel)]="number" aria-label="Número" aria-describedby="inputGroup-sizing-default">
-        <div style="color: red;" *ngIf="!validateNotEmpty(number)" class="error-message"> * Campo obligatorio</div>
-
+      <div class="mb-3">
+        <label for="number" class="form-label">Número</label>
+        <input type="number" class="form-control" [(ngModel)]="number" id="number" required>
+        <div *ngIf="!validateNotEmpty(number)" class="error-message"> * Campo obligatorio</div>
       </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="colony" name="colony">Colonia</span>
-        <input type="text" class="form-control" [(ngModel)]="colony" aria-label="Colonia" aria-describedby="inputGroup-sizing-default">
-        <div style="color: red;" *ngIf="!validateNotEmpty(colony)" class="error-message"> * Campo obligatorio</div>
-
+      <div class="mb-3">
+        <label for="colony" class="form-label">Colonia</label>
+        <input type="text" class="form-control" [(ngModel)]="colony" id="colony" required>
+        <div *ngIf="!validateNotEmpty(colony)" class="error-message"> * Campo obligatorio</div>
       </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="zip_code" name="zip_code">Código Postal</span>
-        <input type="number" class="form-control" [(ngModel)]="zip_code" aria-label="Código Postal" aria-describedby="inputGroup-sizing-default">
-        <div style="color: red;" *ngIf="!validateNotEmpty(zip_code)" class="error-message"> * Campo obligatorio</div>
+      <div class="mb-3">
+        <label for="zip_code" class="form-label">Código Postal</label>
+        <input type="number" class="form-control" [(ngModel)]="zip_code" id="zip_code" required>
+        <div *ngIf="!validateNotEmpty(zip_code)" class="error-message"> * Campo obligatorio</div>
       </div>
     </div>
 
     <!-- Selección de Países y Estados -->
     <div class="col-md-6">
       <div class="mb-3">
-        <label for="selectCountry">País:</label>
-        <select class="form-select" id="selectCountry" name="selectCountry" [(ngModel)]="selectedCountry" (change)="onCountryChange()">
-          <option selected disabled>Selecciona un país</option>
-          <option *ngFor="let pais of countriesResponse" [value]="pais">{{ pais }}</option>
-        </select>
-        <div style="color: red;" *ngIf="!validateNotEmpty(selectedCountry)" class="error-message"> * Campo obligatorio</div>
-
-      </div>
-
-      <div class="mb-3">
-        <label for="selectState">Estado:</label>
-        <select class="form-select" id="selectState" name="selectState" [(ngModel)]="selectedState" (change)="onStateChange()">
+        <label for="selectState" class="form-label">Estado:</label>
+        <select class="form-select" id="selectState" name="selectState" [(ngModel)]="selectedState" required>
           <option selected disabled>Selecciona un estado</option>
           <option *ngFor="let estado of stateResponse" [value]="estado">{{ estado }}</option>
         </select>
-        <div style="color: red;" *ngIf="!validateNotEmpty(selectedState)" class="error-message"> * Campo obligatorio</div>
-
+        <div *ngIf="!validateNotEmpty(selectedState)" class="error-message"> * Campo obligatorio</div>
       </div>
 
       <div class="mb-3">
-        <label for="selectCity">Ciudad:</label>
-        <select class="form-select" id="selectCity" name="municipality" [(ngModel)]="selectedCity">
-          <option selected disabled>Selecciona una ciudad</option>
-          <option *ngFor="let ciudad of citiesResponse" [value]="ciudad">{{ ciudad }}</option>
-        </select>
-        <div style="color: red;" *ngIf="!validateNotEmpty(selectedCity)" class="error-message"> * Campo obligatorio</div>
-
+        <label for="municipality" class="form-label">Ciudad:</label>
+        <input type="text" class="form-control" [(ngModel)]="selectedCity" id="municipality" required>
+        <div *ngIf="!validateNotEmpty(selectedCity)" class="error-message"> * Campo obligatorio</div>
       </div>
     </div>
   </div>
 
+  <div class="card-body">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h3 class="text-black mb-0">Productos en tu carrito:</h3>
+      <p class="text-muted small">Cantidad: {{ getTotalCantidadProductos() }}</p>
+    </div>
+    <div>
+      <h3 class="text-black mb-0">Total a pagar:</h3>
+      <p class="text-muted small"> $ {{ getTotalSubtotales() }} MXN</p>
+    </div>
+  </div>
 
-  <div class="card mt-4">
-    <div class="card-body">
-      <h3 class="text-black">Cantidad de productos: {{getTotalCantidadProductos()}}</h3>
-      <h3 class="text-black">Total a pagar: $ {{getTotalSubtotales()}} MXN</h3>
+  <hr class="my-4">
 
-      <h4 class="mt-4">Por favor, llena los campos para completar tu compra</h4>
-
-      <div class="credit-card">
-        <div>
-          <div #cardInfo></div>
-          <div class="error" *ngIf="cardError">{{cardError}}</div>
-        </div>
-
-        <button (click)="onClick()" type="button" class="btn btn-warning">Pagar</button>
+  <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+    <!-- ... (previous code) ... -->
+  
+    <h4 class="mt-4 mb-3">Completa tu compra</h4>
+  
+    <div class="credit-card">
+      <div>
+        <div #cardInfo></div>
+        <div class="error mt-2" *ngIf="cardError">{{ cardError }}</div>
       </div>
+  
+      <button (click)="onClick()" type="button" class="btn btn-warning mt-3">Pagar ahora</button>
     </div>
   </div>
 </div>
 
+
+
+</div>
 
 
 
